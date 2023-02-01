@@ -10,7 +10,7 @@ const card = ({ id, alt }) => {
       alt="picture of a card"
       width={250}
       height={100}
-      className='hover:scale-105'
+      className="hover:scale-105 mt-2 ml-2"
     />
   );
 };

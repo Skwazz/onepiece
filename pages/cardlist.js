@@ -1,10 +1,11 @@
 import Card from "../components/Card";
 import { useState, useEffect } from "react";
+import Search from "../components/Search";
 
 export default function Home({ cards }) {
-
   return (
     <>
+      <Search />
       <div className="grid grid-cols-2 md:grid-cols-5 mx-auto ">
         {cards?.map((card) => {
           if (card.name !== "-") {
@@ -22,5 +23,5 @@ export async function getStaticProps(context) {
     props: {
       cards,
     },
-  }
+  };
 }
