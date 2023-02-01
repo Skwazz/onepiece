@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Search from "../components/Search";
 
 export default function Home({ cards }) {
+  const [filteredData, setFilteredData] = useState(cards);
+
   return (
     <>
-      <Search />
+      <Search setFilteredData={setFilteredData} data={cards} />
       <div className="grid grid-cols-2 md:grid-cols-5 mx-auto ">
-        {cards?.map((card) => {
+        {filteredData?.map((card) => {
           if (card.name !== "-") {
             return <Card key={card._id} id={card.cardId} alt={card.altArt} />;
           }
