@@ -12,9 +12,13 @@ const Search = ({ data, setFilteredData }) => {
   }, [searchTerm]);
 
   return (
-    <div>
+    <div className="flex justify-center">
       <div className="flex justify-center">
-        <input type="text" onChange={(e) => setSearchTerm(e.target.value)} />
+        <input
+          type="text"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Type To Search Cards!"
+        />
       </div>
     </div>
   );

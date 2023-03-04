@@ -1,5 +1,6 @@
 import Image from "next/image";
-const card = ({ id, alt }) => {
+
+const card = ({ id, alt, color }) => {
   return (
     <Image
       src={
@@ -11,6 +12,7 @@ const card = ({ id, alt }) => {
       width={250}
       height={100}
       className="hover:scale-105 mt-2 ml-2"
+      color={color}
     />
   );
 };
