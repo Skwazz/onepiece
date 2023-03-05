@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
-const Search = ({ data, setFilteredData }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Search = ({ setFilteredData, selectedColors, data }) => {
 
-  useEffect(() => {
-    const filtered = data.filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredData(filtered);
-  }, [searchTerm]);
+  const filterBySearch = (input) => {
+    let updatedCards = [...data]; // need to use filtered array but it does not update when deleting, data does, find some solution.
+    updatedCards = updatedCards.filter((item) => {
+      return item.name.toLowerCase().indexOf(input.toLowerCase()) !== -1;
+    });
+    setFilteredData(updatedCards);
+  };
 
   return (
     <div className="flex justify-center">
       <div className="flex justify-center">
         <input
           type="text"
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={(e) => filterBySearch(e.target.value)}
           placeholder="Type To Search Cards!"
         />
       </div>

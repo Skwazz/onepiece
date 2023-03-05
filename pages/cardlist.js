@@ -4,43 +4,43 @@ import Search from "../components/Search";
 import { set } from "mongoose";
 
 export default function Home({ cards }) {
-  const [filteredData, setFilteredData] = useState(cards);
-
+  const [data, setData] = useState(cards);
+  const [filteredData, setFilteredData] = useState([...cards]);
   const [selectedColors, setSelectedColors] = useState([]);
   const colors = ["Red", "Green", "Blue", "Purple"];
 
   function handleColorChange(color) {
     const newSelectedColors = [...selectedColors];
-
     if (newSelectedColors.includes(color)) {
       const index = newSelectedColors.indexOf(color);
       newSelectedColors.splice(index, 1);
     } else {
       newSelectedColors.push(color);
     }
-
     setSelectedColors(newSelectedColors);
+  }
 
+  useEffect(()=>{
     const newFilteredData = cards.filter((card) => {
-      if (newSelectedColors.length === 0) {
+      if (selectedColors.length === 0) {
         return true;
-      } else if (newSelectedColors.length === 1) {
-        return card.color.includes(newSelectedColors[0]);
+      } else if (selectedColors.length === 1) {
+        return card.color.includes(selectedColors[0]);
       } else {
         const colors = card.color.split("/");
-        return colors.some((c) => newSelectedColors.includes(c));
+        return colors.some((c) => selectedColors.includes(c));
       }
     });
-
     setFilteredData(newFilteredData);
-  }
+  },[selectedColors])
 
   return (
     <>
       <Search
-        setFilteredData={setFilteredData}
-        setSelectedColors={setSelectedColors}
-        data={cards}
+          filteredData={filteredData}
+          setFilteredData={setFilteredData}
+          selectedColors={selectedColors}
+          data={data}
       />
       {colors.map((color) => (
         <div key={color}>
@@ -50,9 +50,7 @@ export default function Home({ cards }) {
               checked={selectedColors.includes(color)}
               onChange={() => handleColorChange(color)}
             />
-            {color.includes("/")
-              ? color.split("/").map((c) => <span key={c}>{c} </span>)
-              : color}
+            {color}
           </label>
         </div>
       ))}
