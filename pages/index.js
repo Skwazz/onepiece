@@ -1,21 +1,25 @@
-
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div>
-      <Image src="/icon.jpg" alt="picture of a card" width={400} height={20} />
+      <body className="bg-cover bg-center h-screen ">
+        <Image
+          src="/logo_3.png"
+          alt="picture of a card"
+          width={400}
+          height={20}
+          className="flex mx-auto"
+        />
 
-      <h1>Welcome To One Piece Israel!</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
+        <h1 className="flex justify-center text-[2.5rem] mx-auto ">
+          !ברוכים הבאים לאתר הוואן פיס של הציידים
+        </h1>
+        <p className="flex justify-center text-[2rem] mx-auto">
+          !האתר כרגע בבנייה אבל מביא קצת משהו להראות לכם תודה רבה ליורה על הרקע
+          המגניב
+        </p>
+      </body>
     </div>
   );
 }

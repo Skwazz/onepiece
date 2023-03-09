@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Card from "./Card";
 
 const Search = ({ setFilteredData, selectedColors, data }) => {
-
   const filterBySearch = (input) => {
     let updatedCards = [...data]; // need to use filtered array but it does not update when deleting, data does, find some solution.
     updatedCards = updatedCards.filter((item) => {
