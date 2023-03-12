@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <body className="bg-cover bg-center h-screen ">
+      <div className="bg-contain bg-center h-screen w-screen">
         <Image
           src="/logo_3.png"
           alt="picture of a card"
@@ -12,14 +12,14 @@ export default function Home() {
           className="flex mx-auto"
         />
 
-        <h1 className="flex justify-center text-[2.5rem] mx-auto ">
+        <div className="flex justify-center text-[2.5rem] mx-auto ">
           !ברוכים הבאים לאתר הוואן פיס של הציידים
-        </h1>
-        <p className="flex justify-center text-[2rem] mx-auto">
+        </div>
+        <div className="flex justify-center text-[2rem] mx-auto">
           !האתר כרגע בבנייה אבל מביא קצת משהו להראות לכם תודה רבה ליורה על הרקע
           המגניב
-        </p>
-      </body>
+        </div>
+      </div>
     </div>
   );
 }

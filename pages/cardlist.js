@@ -1,9 +1,6 @@
 import Card from "../components/Card";
 import { useState, useEffect } from "react";
 import Search from "../components/Search";
-import { set } from "mongoose";
-
-import card from "../components/Card";
 
 export default function Home({ cards }) {
   const [filteredData, setFilteredData] = useState([]);
@@ -68,70 +65,74 @@ export default function Home({ cards }) {
 
   return (
     <>
-      <body className="bg-cover bg-center h-screen ">
-        <div className="flex flex-col rounded-lg bg-white bg-opacity-20 backdrop-blur-lg roundedfilter drop-shadow-md">
-          <Search setSearch={setSearch} />
-          <p className="flex mx-auto justify-center">Color:</p>
-          <div className="flex flex-row justify-center">
-            {" "}
-            {colors.map((color) => (
-              <div key={color} className="flex flex-row justify-center">
-                <label className="mx-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedColors.includes(color)}
-                    onChange={() => handleColorChange(color)}
-                  />
-                  {color}
-                </label>
-              </div>
-            ))}
+      <div className="bg-cover bg-center h-screen ">
+        <div className="flex flex-row">
+          <div className="flex flex-col h-fit rounded-lg bg-black bg-opacity-20 backdrop-blur-lg roundedfilter drop-shadow-md flex-1 ">
+            <Search setSearch={setSearch} />
+            <p className="flex mx-auto justify-center">Color:</p>
+            <div className="flex flex-row justify-center">
+              {" "}
+              {colors.map((color) => (
+                <div key={color} className="flex flex-row justify-center">
+                  <label className="mx-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedColors.includes(color)}
+                      onChange={() => handleColorChange(color)}
+                    />
+                    {color}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+            <p className="flex mx-auto justify-center">Category:</p>
+            <div className="flex flex-row justify-center">
+              {" "}
+              {categories.map((category) => (
+                <div key={category} className="flex justify-center">
+                  <label className="mx-2 flex">
+                    <input
+                      type="checkbox"
+                      checked={selectedCategory.includes(
+                        category.toLowerCase()
+                      )}
+                      onChange={() =>
+                        handleCategoryChange(category.toLowerCase())
+                      }
+                    />
+                    {category}
+                  </label>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <p className="flex mx-auto justify-center">Type:</p>
-          <div className="flex flex-row justify-center">
-            {" "}
-            {categories.map((category) => (
-              <div key={category} className="flex justify-center">
-                <label className="mx-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedCategory.includes(category.toLowerCase())}
-                    onChange={() =>
-                      handleCategoryChange(category.toLowerCase())
-                    }
+          <div className="grid grid-cols-2 md:grid-cols-5 mx-auto ">
+            {filteredData?.map((card) => {
+              if (
+                card.name !== "-" ||
+                selectedColors.includes(card.color) ||
+                selectedCategory.some((c) =>
+                  card.category.includes(c.toLowerCase())
+                )
+              ) {
+                return (
+                  <Card
+                    key={card._id}
+                    id={card.cardId}
+                    alt={card.altArt}
+                    color={card.color}
+                    category={card.category}
                   />
-                  {category}
-                </label>
-              </div>
-            ))}
+                );
+              } else {
+                return null;
+              }
+            })}
           </div>
         </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-5 mx-auto ">
-          {filteredData?.map((card) => {
-            if (
-              card.name !== "-" ||
-              selectedColors.includes(card.color) ||
-              selectedCategory.some((c) =>
-                card.category.includes(c.toLowerCase())
-              )
-            ) {
-              return (
-                <Card
-                  key={card._id}
-                  id={card.cardId}
-                  alt={card.altArt}
-                  color={card.color}
-                  category={card.category}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </div>
-      </body>
+      </div>
     </>
   );
 }
