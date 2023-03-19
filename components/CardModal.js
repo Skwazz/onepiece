@@ -2,6 +2,23 @@ import React from "react";
 import Image from "next/image";
 
 const Modal = ({ showModal, setShowModal, modalData }) => {
+  const data = [
+    { label: "Card ID", value: modalData.cardId },
+    { label: "Rarity", value: modalData.rarity },
+    { label: "Category", value: modalData.category },
+    { label: "Name", value: modalData.name },
+    { label: "Cost", value: modalData.cost },
+    { label: "Life", value: modalData.life },
+    { label: "Attribute", value: modalData.attribute },
+    { label: "Power", value: modalData.power },
+    { label: "Counter", value: modalData.counter },
+    { label: "Color", value: modalData.color },
+    { label: "Type", value: modalData.type },
+    { label: "Effect", value: modalData.effect },
+    { label: "Trigger", value: modalData.trigger },
+    { label: "Card Sets", value: modalData.cardSet },
+  ];
+
   return (
     <>
       {showModal && (
@@ -30,27 +47,22 @@ const Modal = ({ showModal, setShowModal, modalData }) => {
                   alt="picture of a card"
                   width={400}
                   height={300}
-                  className="cursor-pointer"
+                  className="cursor-pointer m-2"
                 />
               </div>
               <div className="flex w-96 h-96">
                 <div className="flex-1 m-0 flex-col text-black font-mono">
                   <h2 className="text-m font-semibold mt-1">Card Details : </h2>
+
                   <p>
-                    Card ID : {modalData.cardId} <br />
-                    Rarity : {modalData.rarity} <br />
-                    Category: {modalData.category} <br />
-                    Name: {modalData.name} <br />
-                    Cost: {modalData.cost} <br />
-                    Life: {modalData.life} <br />
-                    Attribute: {modalData.attribute} <br />
-                    Power: {modalData.power} <br />
-                    Counter: {modalData.counter} <br />
-                    Color: {modalData.color} <br />
-                    Type: {modalData.type} <br />
-                    Effect: {modalData.effect} <br />
-                    Trigger: {modalData.trigger} <br />
-                    Card Sets:{modalData.cardSet} <br />
+                    {data.map(
+                      ({ label, value }) =>
+                        value !== "-" && (
+                          <>
+                            {label}: {value} <br />
+                          </>
+                        )
+                    )}
                   </p>
                 </div>
               </div>
