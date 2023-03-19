@@ -1,11 +1,14 @@
 import Card from "../components/Card";
 import { useState, useEffect } from "react";
 import Search from "../components/Search";
-
+import CardModal from "../components/CardModal";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 export default function Home({ cards }) {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
 
   const [search, setSearch] = useState("");
 
@@ -63,15 +66,28 @@ export default function Home({ cards }) {
     setSelectedCategory(newCategory);
   }
 
+  const handleModal = (card) => {
+    setModalData(card);
+    setShowModal(true);
+  };
+
   return (
     <>
-      <div className="bg-cover bg-center h-screen ">
-        <div className="flex flex-row">
-          <div className="flex flex-col h-fit rounded-lg bg-black bg-opacity-20 backdrop-blur-lg roundedfilter drop-shadow-md flex-1 ">
+      {showModal ? (
+        <CardModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalData={modalData}
+        />
+      ) : null}
+
+      <div className="bg-cover bg-center h-screen">
+        <div className="flex flex-col ">
+          <div className="flex flex-row sticky top-0 h-fit rounded-lg bg-black bg-opacity-20 backdrop-blur-lg roundedfilter drop-shadow-md flex-1 ">
             <Search setSearch={setSearch} />
-            <p className="flex mx-auto justify-center">Color:</p>
-            <div className="flex flex-row justify-center">
-              {" "}
+
+            <div className="flex mt-2 justify-center">
+              <p className="flex justify-center font-bold">Color:</p>{" "}
               {colors.map((color) => (
                 <div key={color} className="flex flex-row justify-center">
                   <label className="mx-2">
@@ -86,12 +102,11 @@ export default function Home({ cards }) {
               ))}
             </div>
 
-            <p className="flex mx-auto justify-center">Category:</p>
-            <div className="flex flex-row justify-center">
-              {" "}
+            <div className="flex mt-2 ml-2 justify-center">
+              <p className="flex justify-center font-bold">Category:</p>{" "}
               {categories.map((category) => (
                 <div key={category} className="flex justify-center">
-                  <label className="mx-2 flex">
+                  <label className="mx-2 ">
                     <input
                       type="checkbox"
                       checked={selectedCategory.includes(
@@ -107,7 +122,6 @@ export default function Home({ cards }) {
               ))}
             </div>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-5 mx-auto ">
             {filteredData?.map((card) => {
               if (
@@ -118,13 +132,15 @@ export default function Home({ cards }) {
                 )
               ) {
                 return (
-                  <Card
-                    key={card._id}
-                    id={card.cardId}
-                    alt={card.altArt}
-                    color={card.color}
-                    category={card.category}
-                  />
+                  <div onClick={() => handleModal(card)}>
+                    <Card
+                      key={card._id}
+                      id={card.cardId}
+                      alt={card.altArt}
+                      color={card.color}
+                      category={card.category}
+                    />
+                  </div>
                 );
               } else {
                 return null;

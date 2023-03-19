@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Navbar = () => {
   return (
-    <nav className="flex bg-white bg-opacity-20 backdrop-blur-lg rounded drop-shadow-lg bg-gradient-to-r from-cyan-600 via-red-600 to-blue-700 px-4 py-4 h-[64px] items-center sticky top-0 z-50">
+    <nav className="flex bg-opacity-50 drop-shadow-lg bg-gray-500 backdrop-blur-lg rounded filter px-4 py-4 h-[64px] items-center sticky">
       <Image src="/logo_3.png" width="100" height="40" className="flex mx-2" />
       <ul className="flex">
         <li className="mr-6 hover:bg-sky-700 hover:rounded-lg">
@@ -13,7 +13,7 @@ const Navbar = () => {
           <Link href="/cardlist">Card List</Link>
         </li>
         <li className="mr-6 hover:bg-sky-700 hover:rounded-lg">
-          <Link href="/contact">Contact</Link>
+          <Link href="/myDecks">My Decks</Link>
         </li>
       </ul>
     </nav>

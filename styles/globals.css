@@ -94,7 +94,9 @@ body {
   background-size: cover;
   height: 100%;
 }
-
+#scroll-to-top-button.visible {
+  opacity: 1;
+}
 a {
   color: inherit;
   text-decoration: none;

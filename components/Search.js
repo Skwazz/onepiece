@@ -4,6 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Search = ({ setSearch }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -13,10 +14,15 @@ const Search = ({ setSearch }) => {
     setIsHovered(false);
   };
 
+  const handleChange = (event) => {
+    setInputValue(event.target.value);
+    setSearch(event.target.value);
+  };
+
   return (
     <div className="flex justify-center">
       <div
-        className="relative block w-12 h-12 rounded-full bg-black text-white bg-opacity-20 hover:w-40 hover:h-10 transition-all"
+        className="relative block w-10 h-10 rounded-full bg-gray-500 text-white bg-opacity-50 hover:w-40 hover:h-10 transition-all"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -31,7 +37,8 @@ const Search = ({ setSearch }) => {
             <FontAwesomeIcon icon={faSearch} className="pl-4" />
             <input
               type="text"
-              onChange={(e) => setSearch(e.target.value)}
+              value={inputValue}
+              onChange={handleChange}
               placeholder="Search Cards"
               className="flex-grow py-2 bg-transparent text-white focus:outline-none text-sm pl-4"
               style={{ maxWidth: "calc(100vw - 108px)" }}
