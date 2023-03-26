@@ -3,10 +3,10 @@ import Image from "next/image";
 
 const Modal = ({ showModal, setShowModal, modalData }) => {
   const data = [
+    { label: "Name", value: modalData.name },
     { label: "Card ID", value: modalData.cardId },
     { label: "Rarity", value: modalData.rarity },
     { label: "Category", value: modalData.category },
-    { label: "Name", value: modalData.name },
     { label: "Cost", value: modalData.cost },
     { label: "Life", value: modalData.life },
     { label: "Attribute", value: modalData.attribute },
@@ -22,16 +22,16 @@ const Modal = ({ showModal, setShowModal, modalData }) => {
   return (
     <>
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
-          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto mt-10">
+          <div className="fixed inset-0 transition-opacity " aria-hidden="true">
             <div
               className="absolute inset-0 bg-gray-500 opacity-25  "
               onClick={() => setShowModal(false)}
             ></div>
           </div>
           <div
-            className="relative z-50 bg-card-bg bg-auto bg-center
-           overflow-hidden rounded-l-2xl"
+            className="relative z-50 bg-opacity-20 backdrop-blur-lg bg-[#020959] bg-auto bg-center  
+           overflow-hidden rounded-xl "
           >
             <button
               onClick={() => setShowModal(false)}
@@ -47,23 +47,24 @@ const Modal = ({ showModal, setShowModal, modalData }) => {
                   alt="picture of a card"
                   width={400}
                   height={300}
-                  className="cursor-pointer m-2"
+                  className="cursor-pointer m-2 opacity-80 border rounded-3xl border-[#ffffff] backdrop-blur-lg"
                 />
               </div>
               <div className="flex w-96 h-96">
-                <div className="flex-1 m-0 flex-col text-black font-mono">
-                  <h2 className="text-m font-semibold mt-1">Card Details : </h2>
-
-                  <p>
+                <div className="flex-1 m-0 flex-col text-white opacity-100 font-mono p-5">
+                  <div className="text-xl font-bold mt-1">Card Details : </div>
+                  <div className="mt-5">
+                    <br />
                     {data.map(
                       ({ label, value }) =>
                         value !== "-" && (
-                          <>
-                            {label}: {value} <br />
-                          </>
+                          <div className="mt-2 text-sm">
+                            {value && <b>{label}: </b>}
+                            {value}
+                          </div>
                         )
                     )}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>

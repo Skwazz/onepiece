@@ -2,7 +2,6 @@ import Card from "../components/Card";
 import { useState, useEffect } from "react";
 import Search from "../components/Search";
 import CardModal from "../components/CardModal";
-import ScrollToTopButton from "../components/ScrollToTopButton";
 export default function Home({ cards }) {
   const [filteredData, setFilteredData] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
@@ -27,8 +26,13 @@ export default function Home({ cards }) {
           return colors.some((c) => selectedColors.includes(c));
         }
       })
+
       .filter((card) => {
-        return card.name.toLowerCase().includes(search.toLowerCase());
+        return (
+          card.name.toLowerCase().includes(search.toLowerCase()) ||
+          card.type.toLowerCase().includes(search.toLocaleLowerCase()) ||
+          card.category.toLowerCase().includes(search.toLowerCase())
+        );
       })
       .filter((card) => {
         if (selectedCategory.length === 0) {
